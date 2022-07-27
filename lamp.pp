@@ -25,3 +25,16 @@ package { 'mysql-server':
 service { 'mysql':
 	ensure => running,
 }
+
+#install php package
+package { 'php':
+	require => Exec['apt-update'],
+	ensure => installed,
+}
+
+#ensure info.php file exists
+file { '/var/www/html/info.php':
+	ensure => file
+	content => '<?php  phpinfo(); ?>',
+	require => Package['apache2'],
+}
