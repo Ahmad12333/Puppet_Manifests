@@ -14,3 +14,14 @@ package { 'apache2':
 service { 'apache2':
 	ensure => running,
 }
+
+#install mysql server package
+package { 'mysql-server':
+	require => Exec['apt-update'],
+	ensure => installed,
+}
+
+#ensure mysql service is running
+service { 'mysql':
+	ensure => running,
+}
